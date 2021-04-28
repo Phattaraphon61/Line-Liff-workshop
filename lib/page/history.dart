@@ -8,6 +8,6 @@ class History_Page extends StatefulWidget {
 class _History_PageState extends State<History_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppBar(title: Text('History_page'),),);
+    return Scaffold(body: Text("History"),);
   }
 }

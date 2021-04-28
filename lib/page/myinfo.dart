@@ -8,6 +8,6 @@ class Myinfo_Page extends StatefulWidget {
 class _Myinfo_PageState extends State<Myinfo_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppBar(title: Text('Myinfo_page'),),);;
+    return Scaffold(appBar: AppBar(title: Text('Myinfo_page'),),);;
   }
 }

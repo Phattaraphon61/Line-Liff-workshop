@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:line_liff/page/appointment.dart';
+import 'package:line_liff/page/history.dart';
 import 'package:line_liff/page/login.dart';
 import 'package:line_liff/page/menu.dart';
+import 'package:line_liff/page/myinfo.dart';
+import 'package:line_liff/page/queue.dart';
 import 'package:line_liff/page/register.dart';
 import 'package:line_liff/page/splash_screen.dart';
 
@@ -14,7 +18,7 @@ class MyApp extends StatelessWidget {
     final _route = <String, WidgetBuilder>{
       '/register': (BuildContext context) => Register_Page(),
       '/login': (BuildContext context) => Menu_Page(),
-      '/intro': (BuildContext context) => Login_Page(),
+    
     };
     return MaterialApp(
       routes: _route,

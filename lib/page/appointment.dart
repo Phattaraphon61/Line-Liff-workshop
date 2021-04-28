@@ -8,6 +8,6 @@ class Appointment_Page extends StatefulWidget {
 class _Appointment_PageState extends State<Appointment_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppBar(title: Text('Appointment_page'),),);
+    return Scaffold(body: Text("Appointment"),);
   }
 }
