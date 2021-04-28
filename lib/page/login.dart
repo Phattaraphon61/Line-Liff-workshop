@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:line_liff/page/menu.dart';
-import 'package:line_liff/page/register.dart';
+import 'package:validators/validators.dart';
 
 class Login_Page extends StatefulWidget {
   @override
@@ -8,23 +7,153 @@ class Login_Page extends StatefulWidget {
 }
 
 class _Login_PageState extends State<Login_Page> {
-  final _route = <String, WidgetBuilder>{
-    '/register': (BuildContext context) => Register_Page(),
-    '/login': (BuildContext context) => Menu_Page(),
-  };
+  final _formKey = GlobalKey<FormState>();
+  FocusNode passwordFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: FlatButton(
-          color: Colors.black54,
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/login');
-          },
-          child: Text('Login'),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+          ),
+          ListView(
+            children: <Widget>[
+              _buildForm(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildForm() {
+    return Card(
+      margin: EdgeInsets.only(top: 120.0, left: 30.0, right: 30.0),
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              _logo(),
+              SizedBox(height: 70.0),
+              _buildUsernameInput(),
+              SizedBox(height: 22.0),
+              _buildPasswordInput(),
+              SizedBox(height: 30.0),
+              _buildSubmitButton(),
+              SizedBox(height: 30.0),
+              buildSignInGoogleButton(),
+              SizedBox(height: 90.0),
+              buildSignupButton(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _logo() {
+    return Image(
+      image: AssetImage('assets/images/logo.png'),
+      fit: BoxFit.cover,
+    );
+  }
+
+  Widget _buildUsernameInput() {
+    return TextFormField(
+      decoration: InputDecoration(
+        hintText: 'ชื่อผู้ใช้',
+        labelText: 'ชื่อผู้ใช้',
+        icon: Icon(Icons.account_box),
+      ),
+      onSaved: null,
+      onFieldSubmitted: (String value) {
+        FocusScope.of(context).requestFocus(passwordFocusNode);
+      },
+    );
+  }
+
+  Widget _buildPasswordInput() {
+    return TextFormField(
+      focusNode: passwordFocusNode,
+      decoration: InputDecoration(
+        labelText: 'รหัสผ่าน',
+        icon: Icon(Icons.lock),
+      ),
+      obscureText: true,
+      validator: _validatePassword,
+      onSaved: null,
+    );
+  }
+
+  String _validatePassword(String value) {
+    if (value.length < 8) {
+      return 'The password must ba at least 8 characters';
+    }
+    return null;
+  }
+
+  Widget _buildSubmitButton() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: RaisedButton(
+        color: Colors.blue,
+        onPressed: _submit,
+        child:
+            Text('เข้าสู่ระบบ',style: TextStyle(color: Colors.white,fontSize: 16.0)),
+      ),
+    );
+  }
+
+  void _submit() {
+    if (this._formKey.currentState.validate()) {
+      Navigator.pushReplacementNamed(context, '/login');
+    } else {
+      null;
+    }
+  }
+
+  Widget buildSignInGoogleButton() {
+    return FlatButton(
+      onPressed: () {},
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.network(
+            'https://cdn.discordapp.com/attachments/834620062090133543/836821196577964073/search.png',
+            width: 40.0,
+            height: 40.0,
+          ),
+          SizedBox(
+            width: 5.0,
+          ),
+          Text(
+            'เข้าสู่ระบบด้วย Google',
+            style: TextStyle(fontSize: 16.0),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSignupButton() {
+    return Row(
+      children: <Widget>[
+        SizedBox(width: 50.0,),
+        Text('หากยังไม่มีบัญชีผู้ใช้',style:TextStyle(fontSize: 16),),
+        FlatButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/register');
+          },
+          child: Text("ลงทะเบียนได้",style: TextStyle(color: Colors.blue,decoration: TextDecoration.underline,fontSize: 16),),
+        ),
+      ],
     );
   }
 }

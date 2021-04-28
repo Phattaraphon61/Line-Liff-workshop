@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: _route,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Splash_Screen(),
+      home: SplashScreen(),
     );
   }
 }
