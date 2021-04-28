@@ -9,6 +9,7 @@ class Login_Page extends StatefulWidget {
 class _Login_PageState extends State<Login_Page> {
   final _formKey = GlobalKey<FormState>();
   FocusNode passwordFocusNode = FocusNode();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,9 @@ class _Login_PageState extends State<Login_Page> {
   }
 
   Widget _buildForm() {
+    double height = MediaQuery.of(context).size.height;
     return Card(
-      margin: EdgeInsets.only(top: 120.0, left: 30.0, right: 30.0),
+      margin: EdgeInsets.only(top: height *0.1, left: 30.0, right: 30.0),
       color: Colors.white,
       child: Padding(
         padding: EdgeInsets.all(20.0),
@@ -144,8 +146,8 @@ class _Login_PageState extends State<Login_Page> {
 
   Widget buildSignupButton() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(width: 50.0,),
         Text('หากยังไม่มีบัญชีผู้ใช้',style:TextStyle(fontSize: 16),),
         FlatButton(
           onPressed: () {
