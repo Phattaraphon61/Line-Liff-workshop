@@ -12,7 +12,7 @@ class _Register_PageState extends State<Register_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AppBar(
+      appBar: AppBar(
         title: Text('Register_page'),
       ),
     );

@@ -8,6 +8,6 @@ class Queue_Page extends StatefulWidget {
 class _Queue_PageState extends State<Queue_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppBar(title: Text('Queue_page'),),);
+    return Scaffold(appBar: AppBar(title: Text('Queue_page'),),);
   }
 }
