@@ -11,7 +11,7 @@ class Menu_Page extends StatefulWidget {
 }
 
 class _Menu_PageState extends State<Menu_Page> {
-  String nameclass = 'login';
+  String nameclass = 'Myinfo';
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _route = <String, WidgetBuilder>{
       '/register': (BuildContext context) => Register_Page(),
-      '/login': (BuildContext context) => Menu_Page(),
+      '/login': (BuildContext context) => Login_Page(),
+       '/menu': (BuildContext context) => Menu_Page(),
     
     };
     return MaterialApp(
