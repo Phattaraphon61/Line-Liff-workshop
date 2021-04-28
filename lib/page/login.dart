@@ -119,6 +119,7 @@ class _Login_PageState extends State<Login_Page> {
     }
   }
 
+
   Widget buildSignInGoogleButton() {
     return FlatButton(
       onPressed: () {},
@@ -144,8 +145,8 @@ class _Login_PageState extends State<Login_Page> {
 
   Widget buildSignupButton() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(width: 50.0,),
         Text('หากยังไม่มีบัญชีผู้ใช้',style:TextStyle(fontSize: 16),),
         FlatButton(
           onPressed: () {
