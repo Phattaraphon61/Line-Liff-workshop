@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Myinfo_Page extends StatefulWidget {
   @override
@@ -8,6 +9,14 @@ class Myinfo_Page extends StatefulWidget {
 class _Myinfo_PageState extends State<Myinfo_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppBar(title: Text('Myinfo_page'),),);;
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: WebView(
+          initialUrl: "https://youtube.com",
+          javascriptMode: JavascriptMode.unrestricted,
+        ),
+      ),
+    );
   }
 }

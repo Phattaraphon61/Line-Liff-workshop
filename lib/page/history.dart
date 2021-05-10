@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class History_Page extends StatefulWidget {
   @override
@@ -8,6 +9,14 @@ class History_Page extends StatefulWidget {
 class _History_PageState extends State<History_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppBar(title: Text('History_page'),),);
+     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: WebView(
+          initialUrl: "https://www.yahoo.com/",
+          javascriptMode: JavascriptMode.unrestricted,
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:line_liff/services/Network.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Queue_Page extends StatefulWidget {
   @override
@@ -8,6 +10,15 @@ class Queue_Page extends StatefulWidget {
 class _Queue_PageState extends State<Queue_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppBar(title: Text('Queue_page'),),);
+    Network.fetchQueue();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: WebView(
+          initialUrl: "https://pub.dev/",
+          javascriptMode: JavascriptMode.unrestricted,
+        ),
+      ),
+    );
   }
 }
