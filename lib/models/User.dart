@@ -37,19 +37,19 @@ class Data {
     this.infoData,
   });
 
-  InfoData infoData;
+  List<InfoDatum> infoData;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    infoData: InfoData.fromJson(json["info_data"]),
+    infoData: List<InfoDatum>.from(json["info_data"].map((x) => InfoDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "info_data": infoData.toJson(),
+    "info_data": List<dynamic>.from(infoData.map((x) => x.toJson())),
   };
 }
 
-class InfoData {
-  InfoData({
+class InfoDatum {
+  InfoDatum({
     this.hn,
     this.prenameText,
     this.fname,
@@ -87,7 +87,7 @@ class InfoData {
   String phone;
   String fullname;
 
-  factory InfoData.fromJson(Map<String, dynamic> json) => InfoData(
+  factory InfoDatum.fromJson(Map<String, dynamic> json) => InfoDatum(
     hn: json["hn"],
     prenameText: json["prename_text"],
     fname: json["fname"],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_liff/models/Queue.dart';
+import 'package:line_liff/models/User.dart';
 import 'package:line_liff/services/Network.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -11,12 +12,13 @@ class Queue_Page extends StatefulWidget {
 class _Queue_PageState extends State<Queue_Page> {
   @override
   Widget build(BuildContext context) {
+    Network.fetchQueue();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: FutureBuilder<List<QueueInfo>>(
-            future: Network.fetchQueue(),
+          child: FutureBuilder<List<User>>(
+            // future: Network.fetchQueue(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
@@ -32,7 +34,7 @@ class _Queue_PageState extends State<Queue_Page> {
       ),
     );
   }
-  Widget _listInfo({List<QueueInfo> data}){
-    return Container(child: Text(data[1].unitName),);
+  Widget _listInfo({List<User> data}){
+    return Container(child: Text("text"),);
   }
 }
