@@ -114,7 +114,7 @@ class _Login_PageState extends State<Login_Page> {
   }
 
   void _submit() {
-    if (!this._formKey.currentState.validate()) {
+    if (this._formKey.currentState.validate()) {
       Navigator.pushReplacementNamed(context, '/menu');
     } else {
       null;
