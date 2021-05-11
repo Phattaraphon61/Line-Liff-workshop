@@ -15,7 +15,7 @@ class _Queue_PageState extends State<Queue_Page> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: WebView(
-          initialUrl: "https://pub.dev/",
+          initialUrl: "https://qsnichdev.orchid.thaihis.org/ezforms2/ezform-data/index?ezf_id=1618928639001498800&token=v5xrSu8hIRtsVgC6SHAI&hn=HN6300047",
           javascriptMode: JavascriptMode.unrestricted,
         ),
       ),
