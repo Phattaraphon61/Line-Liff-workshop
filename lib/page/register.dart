@@ -251,10 +251,10 @@ class _Register_PageState extends State with SingleTickerProviderStateMixin {
                 child: SizedBox(
                   width: 60,
                   child: TextField(
-                     keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     // obscureText: true,
                     decoration: InputDecoration(
                       hintText: "วัน",
@@ -271,10 +271,10 @@ class _Register_PageState extends State with SingleTickerProviderStateMixin {
                 child: SizedBox(
                   width: 60,
                   child: TextField(
-                     keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     // obscureText: true,
                     decoration: InputDecoration(
                       hintText: "เดือน",
@@ -291,10 +291,10 @@ class _Register_PageState extends State with SingleTickerProviderStateMixin {
                 child: SizedBox(
                   width: 60,
                   child: TextField(
-                     keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     // obscureText: true,
                     decoration: InputDecoration(
                       hintText: "พ.ศ.",
