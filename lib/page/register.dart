@@ -435,21 +435,24 @@ class _Register_PageState extends State with SingleTickerProviderStateMixin {
                     // errorText: errorpass ? 'รหัสผ่านไม่ถูกต้อง' : null,
                   ),
                 ),
-                Center(
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      // side: BorderSide(color: Colors.red)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20,top: 15),
+                  child: Center(
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        // side: BorderSide(color: Colors.red)
+                      ),
+                      child: Text(
+                        'ลงทะเบียน',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                      color: Colors.blue[700],
+                      onPressed: () {
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) => Playvideo()));
+                      },
                     ),
-                    child: Text(
-                      'ลงทะเบียน',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                    color: Colors.blue[700],
-                    onPressed: () {
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => Playvideo()));
-                    },
                   ),
                 ),
               ],
