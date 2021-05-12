@@ -1,121 +1,461 @@
 import 'package:flutter/material.dart';
-import 'package:line_liff/page/menu.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class Register_Page extends StatefulWidget {
-  Register_Page({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _Register_PageState createState() => _Register_PageState();
 }
 
-class _Register_PageState extends State<Register_Page> {
+class _Register_PageState extends State with SingleTickerProviderStateMixin {
+  final FocusNode myFocusNode = FocusNode();
+  File _image;
+  String profilePath;
+  final picker = ImagePicker();
+  bool _passwordVisible = true;
+  bool _confirmpasswordVisible = true;
+  final password = TextEditingController();
+  final confirmpassword = TextEditingController();
+  var _value;
+
   @override
-  
-  Widget _imageProfile(){
-    return CircleAvatar(
-    radius: 80,
-    backgroundImage: NetworkImage('https://www.woolha.com/media/2020/03/eevee.png'),
-    backgroundColor: Colors.red,
-    );
+  void initState() {
+    super.initState();
+    downloadImage();
   }
 
-  Widget _entryField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      _image = File(pickedFile.path);
+      print('Select image path' + _image.path.toString());
+    });
   }
 
-  Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.blue,
-      ),
-      child: Text(
-        'ยืนยัน',
-        style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
-  }
-
-  Widget _loginAccountLabel() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Menu_Page()));
-      },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
-        padding: EdgeInsets.all(15),
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'คุณมีบัญชีแล้วหรือไม่ ?',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              }, 
-              child: Text(
-              'เข้าสู่ระบบ',
-              style: TextStyle(
-                  color: Color(0xff376df8),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
-              ),
-            ),          
-          ],
-        ),
-      ),
-    );
+  Future downloadImage() async {
+    if (profilePath != null) {
+      var image = new File(profilePath);
+      setState(() {
+        _image = image;
+      });
+    }
   }
 
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'ลงทะเบียน',
-          style: TextStyle(color: Colors.black, fontSize: 30),
-          ),
+        text: 'ลงทะเบียน',
+        style: TextStyle(color: Colors.black, fontSize: 30),
+      ),
     );
   }
 
-  Widget _UsernamePasswordWidget() {
+  Widget _usernamePasswordWidget() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        _entryField("ชื่อ - สกุล"),
-        _entryField("ชื่อผู้ใช้"),
-        _entryField("รหัสผ่าน", isPassword: true),
-        _entryField("ยืนยันรหัสผ่าน", isPassword: true),
+        Row(
+          children: [
+            SizedBox(
+              width: 130,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('คำนำหน้าชื่อ *'),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: DropdownButtonFormField(
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          // labelText: 'คำนำหน้าชื่อ*',
+                          hintText: "คำนำหน้าชื่อ",
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)))),
+                      onChanged: (newValue) => setState(() {
+                        _value = newValue;
+                      }),
+                      value: _value,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text('นาย'),
+                          value: '1',
+                        ),
+                        DropdownMenuItem(
+                          child: Text('นาง'),
+                          value: '2',
+                        ),
+                        DropdownMenuItem(
+                          child: Text('นางสาว'),
+                          value: '3',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: SizedBox(
+                width: 180,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('อื่นๆ'),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: TextField(
+                          // obscureText: true,
+                          decoration: InputDecoration(
+                            hintText: "กรุณาระบุ อื่นๆ",
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
+            // width: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('ชื่อ *'),
+                Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: TextField(
+                      // obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "กรุณาระบุ ชื่อ",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
+            // width: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('นามสกุล *'),
+                Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: TextField(
+                      // obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "กรุณาระบุ นามสกุล",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
+            // width: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('เลขประจำตัวประชาชน *'),
+                Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: TextField(
+                      maxLength: 13,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      // obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "กรุณาระบุ เลขประจำตัวประชาชน",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 130,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('เพศ *'),
+              Padding(
+                padding: const EdgeInsets.only(top: 3),
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      // labelText: 'คำนำหน้าชื่อ*',
+                      hintText: "กรุณาระบุ เพศ",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8)))),
+                  onChanged: (newValue) => setState(() {
+                    _value = newValue;
+                  }),
+                  value: _value,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text('ชาย'),
+                      value: '1',
+                    ),
+                    DropdownMenuItem(
+                      child: Text('หญิง'),
+                      value: '2',
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            children: [
+              Text(
+                "วันเดือนปีเกิด *",
+                style: TextStyle(fontSize: 18),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: SizedBox(
+                  width: 60,
+                  child: TextField(
+                     keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                    // obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: "วัน",
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: SizedBox(
+                  width: 60,
+                  child: TextField(
+                     keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                    // obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: "เดือน",
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: SizedBox(
+                  width: 60,
+                  child: TextField(
+                     keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                    // obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: "พ.ศ.",
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
+            // width: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('หมายเลขโทรศัพท์ *'),
+                Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      // obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "กรุณาระบุ หมายเลขโทรศัพท์",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
+            // width: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('ชื่อผู้ใช้ *'),
+                Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: TextField(
+                      // obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "กรุณาระบุ ชื่อผู้ใช้",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('รหัสผ่าน *'),
+                TextField(
+                  controller: confirmpassword,
+                  obscureText: _confirmpasswordVisible,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    hintText: 'กรุณาระบุ รหัสผ่าน',
+                    isDense: true,
+                    contentPadding: EdgeInsets.all(8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _confirmpasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.grey),
+                      onPressed: () {
+                        // Update the state i.e. toogle the state of passwordVisible variable
+                        setState(() {
+                          _confirmpasswordVisible = !_confirmpasswordVisible;
+                        });
+                      },
+                    ),
+                    // errorText: errorpass ? 'รหัสผ่านไม่ถูกต้อง' : null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('ยืนยันรหัสผ่าน *'),
+                TextField(
+                  controller: password,
+                  obscureText: _passwordVisible,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    hintText: 'กรุณาระบุ ยืนยันรหัสผ่าน',
+                    isDense: true,
+                    contentPadding: EdgeInsets.all(8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.grey),
+                      onPressed: () {
+                        // Update the state i.e. toogle the state of passwordVisible variable
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                    ),
+                    // errorText: errorpass ? 'รหัสผ่านไม่ถูกต้อง' : null,
+                  ),
+                ),
+                Center(
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      // side: BorderSide(color: Colors.red)
+                    ),
+                    child: Text(
+                      'ลงทะเบียน',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                    color: Colors.blue[700],
+                    onPressed: () {
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Playvideo()));
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -123,41 +463,101 @@ class _Register_PageState extends State<Register_Page> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Container(
-        height: height,
-        child: Stack(
-          children: <Widget>[
+    return new Scaffold(
+        body: ListView(
+      children: [
+        Stack(
+          children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: height * .1),
-                    _title(),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    _imageProfile(),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    _UsernamePasswordWidget(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _submitButton(),
-                    SizedBox(height: height * .1),
-                    _loginAccountLabel(),
+              height: 270.0,
+              width: double.infinity,
+            ),
+            Container(
+              height: 135,
+              width: double.infinity,
+              // color: Colors.blue,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30))),
+            ),
+            // Align(
+            //   alignment: Alignment.topLeft,
+            //   child: IconButton(
+            //     icon: Icon(Icons.arrow_back_ios),
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //     },
+            //     color: Colors.blue,
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Center(child: _title()),
+            ),
+            Positioned(
+              top: 70,
+              left: (MediaQuery.of(context).size.width / 2 - 70.0),
+              child: Container(
+                child: new Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0),
+                      child: new Stack(fit: StackFit.loose, children: [
+                        new Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            new Center(
+                              child: _image == null
+                                  ? CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          'https://img.pngio.com/no-avatar-png-transparent-png-download-for-free-3856300-trzcacak-png-avatar-920_954.png'),
+                                      radius: 65.0)
+                                  : new CircleAvatar(
+                                      backgroundImage: new FileImage(_image),
+                                      radius: 65.0,
+                                    ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(top: 90.0, left: 90.0),
+                            child: new Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                new FloatingActionButton(
+                                  foregroundColor: Colors.grey,
+                                  backgroundColor: Colors.white,
+                                  onPressed: getImage,
+                                  tooltip: 'Pick Image',
+                                  child: Icon(Icons.add_a_photo),
+                                ),
+                              ],
+                            )),
+                      ]),
+                    )
                   ],
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 210, left: 20, right: 20),
+              child: Column(
+                children: [
+                  _usernamePasswordWidget(),
+                ],
+              ),
+            ),
           ],
         ),
-      ),
-    );
+      ],
+    ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

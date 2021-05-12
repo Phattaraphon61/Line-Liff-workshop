@@ -100,10 +100,11 @@ class _Menu_PageState extends State<Menu_Page> {
                   Navigator.of(context).pop();
                 },
                 leading: Image.network(
-                  'https://cdn.discordapp.com/attachments/834620062090133543/836836380675145758/969312.png',
-                  width: 30,
-                  height: 30,
-                ),
+                    'https://cdn.discordapp.com/attachments/834620062090133543/836836380675145758/969312.png',
+                    width: 30,
+                    height: 30,
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    colorBlendMode: BlendMode.modulate),
                 title: Text(
                   "ข้อมูลของฉัน",
                   style: TextStyle(fontSize: 18),
@@ -122,12 +123,14 @@ class _Menu_PageState extends State<Menu_Page> {
                   'https://media.discordapp.net/attachments/834620062090133543/836834745303826472/3601157.png',
                   width: 30,
                   height: 30,
+                   color: Color.fromRGBO(255, 255, 255, 0.3),
+                    colorBlendMode: BlendMode.modulate
                 ),
                 title: Text(
                   "ประวัติการรักษา",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18,color: Colors.grey),
                 ),
-                trailing: Icon(Icons.arrow_forward),
+                trailing: Icon(Icons.arrow_forward,color: Colors.grey[350],),
               ),
               ListTile(
                 onTap: () {
