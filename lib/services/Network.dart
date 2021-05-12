@@ -65,7 +65,7 @@ class Network {
       // for(var i = 0;i<queueList.data.queueInfo.length;i++) {
       //   print(queueList.data.queueInfo[i].fullname);
       // }
-      print(queue.data.queueData[0].vn);
+      print(queue.data.queueData[0]);
       return queue.data.queueData;
     } else {
       // If that call was not successful, throw an error.
