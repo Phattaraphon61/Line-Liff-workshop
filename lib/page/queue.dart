@@ -39,15 +39,18 @@ class _Queue_PageState extends State<Queue_Page> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children :[
-                  Image.network(
-                    'https://media.discordapp.net/attachments/834620062090133543/836834856531918878/3113776.png',
-                    width: 30,
-                    height: 30,
-                ),
-                Text('คิวของฉัน',style: TextStyle(fontSize: 28)),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top:5),
+              child: Row(
+                children :[
+                    Image.network(
+                      'https://media.discordapp.net/attachments/834620062090133543/836834856531918878/3113776.png',
+                      width: 30,
+                      height: 30,
+                  ),
+                  Text('คิวของฉัน',style: TextStyle(fontSize: 28)),
+                ],
+              ),
             ), 
             Text('รหัสคิว',style: TextStyle(fontSize: 24)),
             Text(data[0].qCode,style: TextStyle(fontSize: 18),),
