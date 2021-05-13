@@ -37,195 +37,223 @@ class _Myinfo_PageState extends State<Myinfo_Page> {
   Widget _listInfo({List<InfoDatum> data}) {
     return Column(
       children: <Widget>[
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(50.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  child: Row(
-                    children: [
-                      Image.network(
-                        'https://cdn.discordapp.com/attachments/834620062090133543/836836380675145758/969312.png',
-                        width: 40,
-                        height: 40,
+        Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                child: Row(
+                  children: [
+                    Image.network(
+                      'https://cdn.discordapp.com/attachments/834620062090133543/836836380675145758/969312.png',
+                      width: 60,
+                      height: 60,
+                    ),
+                    SizedBox(width: 20),
+                    Text(
+                      'ข้อมูลของฉัน',
+                      style: TextStyle(fontSize: 30.0),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                'HN: ${data[0].hn}\n'
+                'AN: ${data[0].hn}',
+                style: TextStyle(
+                  fontSize: 22.0,
+                  color: Colors.blue[700],
+                ),
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 10.0),
+                      color: Colors.blue[700],
+                      child: Text(
+                        'ข้อมูลเบื้องต้น',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
-                      SizedBox(width: 20),
-                      Text(
-                        'ข้อมูลของฉัน',
-                        style: TextStyle(
-                            color: Colors.blueAccent,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 23.0),
-                      )
-                    ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Text(
-                  'HN: ${data[0].hn}\n'
-                  'AN: ${data[0].hn}',
-                  style: TextStyle(
-                    fontSize: 19.0,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                Text(
-                  'ข้อมูลเบื้องต้น',
-                  style: TextStyle(fontSize: 15),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'ชื่อ - สกุล: ${data[0].fullname}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'CID: ${data[0].cid}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 12.0,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'วันเกิด: ${data[0].birth}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'อายุ: ${data[0].age} ปี',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'กรุ๊ปเลือด: ${data[0].abogroupText}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'เพศ: ${data[0].sexText}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 12.0,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'ที่อยู่: ${data[0].currentAddress}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'HN: ${data[0].hn}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 12.0,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'ต. ${data[0].currentTambon}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'อ. ${data[0].currentAmphur}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'จ. ${data[0].currentProvince}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      data[0].currentZipcode,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 12.0,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'โทรศัพท์: ${data[0].currentAddressTel}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      ' มือถือ: ${data[0].phone}',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 12.0,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'สถานะ: ตรวจแล้ว',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+              _CardInfo(data: data)
+            ],
           ),
         ),
       ],
+    );
+  }
+
+  Widget _CardInfo({data}) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.blue[700]),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  'ชื่อ - สกุล : ${data[0].fullname}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              'CID: ${data[0].cid}',
+              style: TextStyle(
+                fontSize: 18.0,
+              ),
+            ),
+            SizedBox(
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'วันเกิด: ${data[0].birth}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'อายุ: ${data[0].age} ปี',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Text(
+                  'กรุ๊ปเลือด: ${data[0].abogroupText}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'เพศ: ${data[0].sexText}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'ที่อยู่: ${data[0].currentAddress}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'HN: ${data[0].hn}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'ต. ${data[0].tambon}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'อ. ${data[0].amphur}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Text(
+                  'จ. ${data[0].province}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  data[0].currentZipcode,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'โทรศัพท์: ${data[0].currentAddressTel}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  ' มือถือ: ${data[0].phone}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 12.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'สถานะ: ตรวจแล้ว',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

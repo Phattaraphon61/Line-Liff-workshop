@@ -21,7 +21,6 @@ class Network {
       // for(var i = 0;i<queueList.data.queueInfo.length;i++) {
       //   print(queueList.data.queueInfo[i].fullname);
       // }
-      print(allQueue.data.allQueueData[0].vn);
       return allQueue.data.allQueueData;
     } else {
       // If that call was not successful, throw an error.
@@ -38,13 +37,12 @@ class Network {
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       //
-      User allQueue = User.fromJson(jsonResponse);
+      User user = User.fromJson(jsonResponse);
 
       // for(var i = 0;i<queueList.data.queueInfo.length;i++) {
       //   print(queueList.data.queueInfo[i].fullname);
       // }
-      print(allQueue.data.infoData[0].fullname);
-      return allQueue.data.infoData;
+      return user.data.infoData;
       // return ;
     } else {
       // If that call was not successful, throw an error.
@@ -65,7 +63,6 @@ class Network {
       // for(var i = 0;i<queueList.data.queueInfo.length;i++) {
       //   print(queueList.data.queueInfo[i].fullname);
       // }
-      print(queue.data.queueData[0]);
       return queue.data.queueData;
     } else {
       // If that call was not successful, throw an error.

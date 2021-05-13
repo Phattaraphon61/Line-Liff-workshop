@@ -112,7 +112,7 @@ class _Queue_PageState extends State<Queue_Page> {
               ),
             ],
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 15.0),
           Row(
             children: [
               Text(
@@ -187,12 +187,12 @@ class _Queue_PageState extends State<Queue_Page> {
               ),
             ],
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 10.0),
           Text(
             'ประวัติคิวทั้งหมด ',
             style: TextStyle(fontSize: 22.0),
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 5.0),
           Row(
             children: [
               Text(
@@ -200,7 +200,7 @@ class _Queue_PageState extends State<Queue_Page> {
                 style: TextStyle(fontSize: 18.0, color: Colors.blue[700]),
               ),
               Text(
-                '${data[0].createDate}',
+                '${data[0].createDate.toString().split(".")[0]}',
                 style: TextStyle(fontSize: 18.0),
               ),
             ],
@@ -235,9 +235,7 @@ class _Queue_PageState extends State<Queue_Page> {
               ),
             ],
           ),
-          SizedBox(
-            height: 10.0,
-          ),
+
           Row(
             children: [
               Text(
