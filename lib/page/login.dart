@@ -154,7 +154,7 @@ class _Login_PageState extends State<Login_Page> {
           onPressed: () {
             Navigator.pushNamed(context, '/register');
           },
-          child: Text("ลงทะเบียนได้",style: TextStyle(color: Colors.blue,decoration: TextDecoration.underline,fontSize: 16),),
+          child: Text("ลงทะเบียนได้ที่นี้",style: TextStyle(color: Colors.blue,decoration: TextDecoration.underline,fontSize: 16),),
         ),
       ],
     );

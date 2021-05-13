@@ -10,24 +10,16 @@ String userToJson(User data) => json.encode(data.toJson());
 
 class User {
   User({
-    this.status,
-    this.message,
     this.data,
   });
 
-  String status;
-  String message;
   Data data;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    status: json["status"],
-    message: json["message"],
     data: Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "message": message,
     "data": data.toJson(),
   };
 }
@@ -37,19 +29,19 @@ class Data {
     this.infoData,
   });
 
-  InfoData infoData;
+  List<InfoDatum> infoData;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    infoData: InfoData.fromJson(json["info_data"]),
+    infoData: List<InfoDatum>.from(json["info_data"].map((x) => InfoDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "info_data": infoData.toJson(),
+    "info_data": List<dynamic>.from(infoData.map((x) => x.toJson())),
   };
 }
 
-class InfoData {
-  InfoData({
+class InfoDatum {
+  InfoDatum({
     this.hn,
     this.prenameText,
     this.fname,
@@ -60,13 +52,13 @@ class InfoData {
     this.abogroupText,
     this.sexText,
     this.currentAddress,
-    this.currentTambon,
-    this.currentAmphur,
-    this.currentProvince,
     this.currentZipcode,
     this.currentAddressTel,
     this.phone,
     this.fullname,
+    this.province,
+    this.amphur,
+    this.tambon,
   });
 
   String hn;
@@ -79,15 +71,15 @@ class InfoData {
   String abogroupText;
   String sexText;
   String currentAddress;
-  String currentTambon;
-  String currentAmphur;
-  String currentProvince;
   String currentZipcode;
   String currentAddressTel;
   String phone;
   String fullname;
+  String province;
+  String amphur;
+  String tambon;
 
-  factory InfoData.fromJson(Map<String, dynamic> json) => InfoData(
+  factory InfoDatum.fromJson(Map<String, dynamic> json) => InfoDatum(
     hn: json["hn"],
     prenameText: json["prename_text"],
     fname: json["fname"],
@@ -98,13 +90,13 @@ class InfoData {
     abogroupText: json["abogroup_text"],
     sexText: json["sex_text"],
     currentAddress: json["current_address"],
-    currentTambon: json["current_tambon"],
-    currentAmphur: json["current_amphur"],
-    currentProvince: json["current_province"],
     currentZipcode: json["current_zipcode"],
     currentAddressTel: json["current_address_tel"],
     phone: json["phone"],
     fullname: json["fullname"],
+    province: json["province"],
+    amphur: json["amphur"],
+    tambon: json["tambon"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -118,12 +110,12 @@ class InfoData {
     "abogroup_text": abogroupText,
     "sex_text": sexText,
     "current_address": currentAddress,
-    "current_tambon": currentTambon,
-    "current_amphur": currentAmphur,
-    "current_province": currentProvince,
     "current_zipcode": currentZipcode,
     "current_address_tel": currentAddressTel,
     "phone": phone,
     "fullname": fullname,
+    "province": province,
+    "amphur": amphur,
+    "tambon": tambon,
   };
 }

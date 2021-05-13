@@ -2,82 +2,72 @@
 //
 //     final queue = queueFromJson(jsonString);
 
+import 'dart:convert';
+
+Queue queueFromJson(String str) => Queue.fromJson(json.decode(str));
+
+String queueToJson(Queue data) => json.encode(data.toJson());
+
 class Queue {
   Queue({
     this.data,
-    this.reloadDiv,
   });
 
   Data data;
-  String reloadDiv;
 
   factory Queue.fromJson(Map<String, dynamic> json) => Queue(
     data: Data.fromJson(json["data"]),
-    reloadDiv: json["reload_div"],
   );
 
   Map<String, dynamic> toJson() => {
     "data": data.toJson(),
-    "reload_div": reloadDiv,
   };
 }
 
 class Data {
   Data({
-    this.queueInfo,
+    this.allQueueData,
   });
 
-  List<QueueInfo> queueInfo;
+  List<AllQueueDatum> allQueueData;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    queueInfo: List<QueueInfo>.from(json["queue_info"].map((x) => QueueInfo.fromJson(x))),
+    allQueueData: List<AllQueueDatum>.from(json["all_queue_data"].map((x) => AllQueueDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "queue_info": List<dynamic>.from(queueInfo.map((x) => x.toJson())),
+    "all_queue_data": List<dynamic>.from(allQueueData.map((x) => x.toJson())),
   };
 }
 
-class QueueInfo {
-  QueueInfo({
+class AllQueueDatum {
+  AllQueueDatum({
+    this.createDate,
+    this.updateDate,
     this.qCode,
-    this.qStatus,
-    this.spCode,
-    this.spName,
-    this.unitCode,
     this.unitName,
-    this.fullname,
-    this.qDate,
+    this.vn,
   });
 
+  DateTime createDate;
+  DateTime updateDate;
   String qCode;
-  String qStatus;
-  String spCode;
-  String spName;
-  String unitCode;
   String unitName;
-  String fullname;
-  String qDate;
+  String vn;
 
-  factory QueueInfo.fromJson(Map<String, dynamic> json) => QueueInfo(
+  factory AllQueueDatum.fromJson(Map<String, dynamic> json) => AllQueueDatum(
+    createDate: DateTime.parse(json["create_date"]),
+    updateDate: DateTime.parse(json["update_date"]),
     qCode: json["q_code"],
-    qStatus: json["q_status"],
-    spCode: json["sp_code"],
-    spName: json["sp_name"],
-    unitCode: json["unit_code"],
     unitName: json["unit_name"],
-    fullname: json["fullname"],
-    qDate: json["q_date"],
+    vn: json["vn"],
   );
 
   Map<String, dynamic> toJson() => {
+    "create_date": createDate.toIso8601String(),
+    "update_date": updateDate.toIso8601String(),
     "q_code": qCode,
-    "q_status": qStatus,
-    "sp_code": spCode,
-    "sp_name": spName,
-    "unit_code": unitCode,
     "unit_name": unitName,
-    "fullname": fullname,
-    "q_date": qDate,
+    "vn": vn,
   };
 }
