@@ -364,6 +364,30 @@ class _Register_PageState extends State with SingleTickerProviderStateMixin {
         Padding(
           padding: const EdgeInsets.only(top: 8),
           child: SizedBox(
+            // width: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('อีเมล *'),
+                Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: TextField(
+                      // obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "กรุณาระบุ อีเมลผู้ใช้",
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

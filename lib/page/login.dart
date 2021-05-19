@@ -70,8 +70,8 @@ class _Login_PageState extends State<Login_Page> {
   Widget _buildUsernameInput() {
     return TextFormField(
       decoration: InputDecoration(
-        hintText: 'ชื่อผู้ใช้',
-        labelText: 'ชื่อผู้ใช้',
+
+        labelText: 'ชื่อผู้ใช้ หรือ อีเมล',
         icon: Icon(Icons.account_box),
       ),
       onSaved: null,
